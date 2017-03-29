@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WitchWay", "WitchWay\WitchWay.csproj", "{6FCE13AC-2E67-40BE-B4FD-15FD91F8B70E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FCE13AC-2E67-40BE-B4FD-15FD91F8B70E}.Debug|x86.ActiveCfg = Debug|x86
+		{6FCE13AC-2E67-40BE-B4FD-15FD91F8B70E}.Debug|x86.Build.0 = Debug|x86
+		{6FCE13AC-2E67-40BE-B4FD-15FD91F8B70E}.Release|x86.ActiveCfg = Release|x86
+		{6FCE13AC-2E67-40BE-B4FD-15FD91F8B70E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

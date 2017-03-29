@@ -1,0 +1,40 @@
+,Bottom right platform,
+Platform,800,620
+Platform,900,620
+Platform,1000,620
+Platform,1100,620
+Platform,1200,620
+,Bottom left platform,
+Platform,550,550
+Platform,450,550
+Platform,350,550
+Platform,250,550
+Platform,150,550
+Platform,50,550
+Platform,0,550
+,Middle,
+Platform,0,400
+Platform,1000,400
+Platform,1100,400
+Platform,1200,400
+,Top,
+Platform,850,200
+Platform,650,200
+Platform,450,200
+Platform,0,200
+,Cat position,
+Cat,0,170
+,Witch position,
+Witch,0,100
+,Cauldron positions,
+Cauldron,500,420
+Cauldron,850,450
+Cauldron,180,450
+Cauldron,1175,290
+Cauldron,230,250
+,Door position
+Door,80,125
+,Orbs positions
+Orb,700,280
+Orb,35, 350
+Orb,350,75

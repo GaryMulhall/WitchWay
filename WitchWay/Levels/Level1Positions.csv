@@ -1,0 +1,42 @@
+,Bottom right platform,
+Platform,800,620
+Platform,900,620
+Platform,1000,620
+Platform,1100,620
+Platform,1200,620
+,Bottom left platform,
+Platform,550,550
+Platform,450,550
+Platform,350,550
+Platform,250,550
+Platform,150,550
+Platform,50,550
+,Middle and stairs,
+Platform,0,550
+Platform,0,450
+Platform,200,450
+Platform,300,450
+Platform,400,450
+Platform,500,450
+Platform,550,450
+Platform,800,400
+Platform,950,350
+Platform,1100,300
+Platform,1250,250
+,Top left platform,
+Platform,950,200
+Platform,850,200
+Platform,750,200
+Platform,500,200
+Platform,250,200
+Platform,0,200
+,Cat position,
+Cat,0,170
+,Witch position,
+Witch,0,100
+,Door position
+Door,80,125
+,Orb positions
+Orb,1180,675
+Orb,1260,220
+Orb,540,180

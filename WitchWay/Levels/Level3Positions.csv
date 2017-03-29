@@ -1,0 +1,34 @@
+,Bottom right platform,
+Platform,1200,630
+Platform,1100,630
+,Bottom left platform,
+,Middle,
+Platform,-75,320
+Platform,-25,430
+Platform,1000,400
+Platform,950,400
+Platform,1100,400
+Platform,1200,400
+,Top,
+Platform,-75,150
+,Cat position,
+Cat,1175,680
+,Witch position,
+Witch,50,620
+,Cauldron positions,
+Cauldron,525,550
+Cauldron,825,600
+Cauldron,225,500
+Cauldron,250,262
+Cauldron,650,350
+Cauldron,1130,300
+Cauldron,1230,200
+,Poop positions,
+Poop,500,0,0,0.15
+Poop,0,250,0.15,0
+,Door position
+Door,1100,645
+,Orb positions,
+Orb,40,405
+Orb,950,150
+Orb,5,125
