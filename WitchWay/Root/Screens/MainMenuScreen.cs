@@ -40,7 +40,7 @@ namespace WitchWay
 
             if (enterPressed || playButton.IsClicked())
             {
-                Game.ScreenMgr.Switch(new Level1Screen(Game));
+                Game.ScreenMgr.Switch(new GameScreen(Game));
             }
             if(quitButton.IsClicked())
             {

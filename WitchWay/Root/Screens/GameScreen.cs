@@ -13,7 +13,7 @@ using System.IO;
 namespace WitchWay
 {
     //GameScreen class inherits properties from the IDrawable, IUpdateable and ILoadable interface
-    class Level1Screen : BaseScreen
+    class GameScreen : BaseScreen
     {
 
         int currentLevel;
@@ -22,7 +22,7 @@ namespace WitchWay
 
         Button continueButton;
 
-        public Level1Screen(Game1 game) : base(game)
+        public GameScreen(Game1 game) : base(game)
         {
         }
 

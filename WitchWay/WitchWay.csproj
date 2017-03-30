@@ -41,11 +41,7 @@
     <Compile Include="Root\Game Objects\Orb.cs" />
     <Compile Include="Root\Game Objects\Door.cs" />
     <Compile Include="Root\Screens\GameOverScreen.cs" />
-    <Compile Include="Root\Screens\Level5Screen.cs" />
-    <Compile Include="Root\Screens\Level4Screen.cs" />
     <Compile Include="Root\Game Objects\Platform.cs" />
-    <Compile Include="Root\Screens\Level3Screen.cs" />
-    <Compile Include="Root\Screens\Level2Screen.cs" />
     <Compile Include="Root\Game Objects\Poop.cs" />
     <Compile Include="Root\Screens\PauseScreen.cs" />
     <Compile Include="Root\Game Objects\Sprite.cs" />
@@ -54,7 +50,7 @@
     <Compile Include="Root\Managers\Input.cs" />
     <Compile Include="Root\Game Objects\MoveableSprite.cs" />
     <Compile Include="Root\Screens\BaseScreen.cs" />
-    <Compile Include="Root\Screens\Level1Screen.cs" />
+    <Compile Include="Root\Screens\GameScreen.cs" />
     <Compile Include="Root\Screens\MainMenuScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,9 +20,9 @@ Platform,1200,400
 Platform,850,200
 Platform,650,200
 Platform,450,200
-Platform,0,200
+Platform,1180,150
 ,Cat position,
-Cat,0,170
+Cat,1220,120
 ,Witch position,
 Witch,50,650
 ,Cauldron positions,
@@ -35,4 +35,4 @@ Cauldron,230,250
 ,Poop positions,
 Poop,675,650
 ,Door position
-Door,75,125
+Door,1180,80
