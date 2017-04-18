@@ -1,38 +1,86 @@
 ,Bottom right platform,
-Platform,900,620
-Platform,1000,620
-Platform,1100,620
-Platform,1200,620
+
+
+
 ,Bottom left platform,
-Platform,550,550
-Platform,450,550
-Platform,350,550
-Platform,250,550
-Platform,150,550
-Platform,50,550
-Platform,0,550
+
+
 ,Middle,
-Platform,0,400
-Platform,1000,400
-Platform,1100,400
-Platform,1200,400
+
+
+
 ,Top,
-Platform,850,200
-Platform,650,200
-Platform,450,200
-Platform,0,200
+
+
+
 ,Cat position,
-Cat,0,170
+Cat,1175,680
+
+
 ,Witch position,
 Witch,50,650
-,Cauldron positions,
-Cauldron,750,590
-Cauldron,500,420
-Cauldron,850,450
-Cauldron,180,450
-Cauldron,1175,290
-Cauldron,230,250
+
+
 ,Poop positions,
-Poop,675,650
+Poop,350,680,0,0.15
+Poop,550,0,0,0.15
+
+
+Poop,0,300,0.15,0
+Poop,1250,550,0.15,0
+
+
 ,Door position
-Door,75,125
+Door,1200,600
+
+
+,Orb positions,
+Orb,760,365
+Orb,560,60
+Orb,160,60
+
+,Spike positions,
+Spike,1100,620
+Spike,1100,540
+Spike,1100,460
+Spike,1100,380
+Spike,1100,300
+Spike,1100,280
+Spike,1100,200
+
+
+Spike,265,630
+Spike,465,630
+Spike,665,630
+Spike,765,630
+Spike,765,540
+Spike,765,460
+
+Spike,965,630
+Spike,965,540
+Spike,965,460
+Spike,965,380
+
+Spike,765,200
+Spike,765,140
+Spike,565,140
+Spike,565,200
+Spike,365,200
+Spike,365,140
+Spike,165,200
+Spike,165,140
+
+,Cauldron positions,
+Cauldron,150,650
+Cauldron,250,600
+Cauldron,450,600
+Cauldron,850,200
+Cauldron,650,200
+Cauldron,450,200
+Cauldron,250,200
+Cauldron,50,200
+
+,Double Cauldron positions,
+DoubleCauldron,650,600
+DoubleCauldron,850,550
+DoubleCauldron,1015,400

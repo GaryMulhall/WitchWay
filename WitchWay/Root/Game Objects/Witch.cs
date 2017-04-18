@@ -17,8 +17,8 @@ namespace WitchWay
         private bool v;
         const float PlayerSpeed = 9.4f;
         float jumpSpeed;
-        public static int lives = 3;
-        public static int orbs = 0;
+        public int lives = 3;
+        public int orbs = 0;
         protected Game1 Game;
 
         int m_gameTime;
@@ -60,6 +60,11 @@ namespace WitchWay
                 {
                     return false;
                 }
+                foreach (var doubleCauldron in collideableSprites.OfType<DoubleCauldron>())
+                {
+                    if (newBounds.Intersects(doubleCauldron.Hitbox))
+                        return false;
+                }
                 foreach (var cauldron in collideableSprites.OfType<Cauldron>())
                 {
                     if (newBounds.Intersects(cauldron.Hitbox))
@@ -95,6 +100,7 @@ namespace WitchWay
                 {
                     m_position.X = door.Hitbox.X - m_texture.Width;
                 }
+
                 if (orbs == 3)
                 {
                     door.Destroyed = true;
@@ -124,6 +130,16 @@ namespace WitchWay
                     m_position.Y = 650;
                 }
             }
+            foreach (var spike in collideableSprites.OfType<Spike>())
+            {
+                if (Hitbox.Intersects(spike.Hitbox) && m_gameTime > 0)
+                {
+                    m_gameTime = 0;
+                    lives--;
+                    m_position.X = 50;
+                    m_position.Y = 650;
+                }
+            }
 
             Vector2 velocity = Vector2.Zero;
             // setting what happens if the character is currently in the falling state
@@ -145,6 +161,15 @@ namespace WitchWay
                     {
                         m_position.Y = cauldron.Hitbox.Y - m_texture.Height;
                         jumpSpeed = -17;
+                        m_state = states.Jumping;
+                    }
+                }
+                foreach (var doubleCauldron in collideableSprites.OfType<DoubleCauldron>())
+                {
+                    if (Hitbox.Intersects(doubleCauldron.Hitbox))
+                    {
+                        m_position.Y = doubleCauldron.Hitbox.Y - m_texture.Height;
+                        jumpSpeed = -22;
                         m_state = states.Jumping;
                     }
                 }
@@ -260,8 +285,8 @@ namespace WitchWay
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, string.Format("Lives: " + lives), livesPos, Color.White);
-            spriteBatch.DrawString(Font, string.Format("Orbs: " + orbs), orbsPos, Color.White);
+            //spriteBatch.DrawString(Font, string.Format("Lives: " + lives), livesPos, Color.White);
+            //spriteBatch.DrawString(Font, string.Format("Orbs: " + orbs), orbsPos, Color.White);
             spriteBatch.Draw(m_texture, m_position, Color.White);
         }
     }

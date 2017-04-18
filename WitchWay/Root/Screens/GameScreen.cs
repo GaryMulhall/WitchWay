@@ -22,6 +22,9 @@ namespace WitchWay
 
         Button continueButton;
 
+        ImageCounter livesCounter;
+        ImageCounter orbsCounter;
+
         public GameScreen(Game1 game) : base(game)
         {
         }
@@ -35,6 +38,9 @@ namespace WitchWay
 
             continueButton = new Button();
             continueButton.Load(content, new Vector2(540, 310), "continueButton", "continueButtonHighlight");
+
+            livesCounter = new ImageCounter(content.Load<Texture2D>("orbCollected"), content.Load<Texture2D>("orb"), new Vector2(1080, 25), new Vector2(50, 0), 3, 2);
+            orbsCounter = new ImageCounter(content.Load<Texture2D>("orbCollected"), content.Load<Texture2D>("orb"), new Vector2(50, 25), new Vector2(50, 0), 3, 2);
 
         }
 
@@ -90,6 +96,10 @@ namespace WitchWay
                     {
                         addCollideable(content, new Vector2(x, y), new Cauldron(true));
                     }
+                    else if (values[0] == "DoubleCauldron")
+                    {
+                        addCollideable(content, new Vector2(x, y), new DoubleCauldron(true));
+                    }
                     else if (values[0] == "Door")
                     {
                         addCollideable(content, new Vector2(x, y), new Door(true));
@@ -98,6 +108,10 @@ namespace WitchWay
                     {
                         addCollideable(content, new Vector2(x, y), new Orb(true));
 
+                    }
+                    else if (values[0] == "Spike")
+                    {
+                        addCollideable(content, new Vector2(x, y), new Spike(true));
                     }
                     else if (values[0] == "Poop")
                     {
@@ -130,6 +144,15 @@ namespace WitchWay
 
         public override void Update(GameTime gameTime)
         {
+            if (moveableSprites.OfType<Witch>().Count() > 0)
+            {
+                Witch witch = moveableSprites.OfType<Witch>().First();
+
+                livesCounter.SetCount(witch.lives);
+                orbsCounter.SetCount(witch.orbs);
+            }
+
+
 
             if (Input.beenPressed(Keys.R))
             {
@@ -177,6 +200,9 @@ namespace WitchWay
             {
                 continueButton.Draw(spriteBatch);
             }
+
+            livesCounter.Draw(spriteBatch);
+            orbsCounter.Draw(spriteBatch);
         }
     }
 }

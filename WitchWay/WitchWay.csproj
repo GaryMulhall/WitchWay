@@ -38,6 +38,7 @@
     <ApplicationIcon>Content\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ImageCounter.cs" />
     <Compile Include="Root\Game Objects\Orb.cs" />
     <Compile Include="Root\Game Objects\Door.cs" />
     <Compile Include="Root\Screens\GameOverScreen.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Interfaces.cs" />
     <Compile Include="Root\Game Objects\CollideableSprite.cs" />
     <Compile Include="Root\Managers\ScreenManager.cs" />
+    <Compile Include="Root\Game Objects\Spike.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
