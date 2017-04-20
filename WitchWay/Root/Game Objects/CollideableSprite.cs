@@ -15,7 +15,9 @@ namespace WitchWay
         protected Vector2 m_position;
         protected Vector2 m_prevPosition;
 
-        public Rectangle Hitbox
+        protected bool m_visible = true;
+
+        public virtual Rectangle Hitbox
         {
             get
             {
@@ -32,10 +34,14 @@ namespace WitchWay
         {
             if (m_texture == null)
             {
-                throw new  InvalidOperationException("A texture has not been loaded. Check the Content folder!");
+                throw new InvalidOperationException("A texture has not been loaded. Check the Content folder!");
             }
 
-            spriteBatch.Draw(m_texture, m_position, Color.White);
+            if (m_visible)
+            {
+                spriteBatch.Draw(m_texture, m_position, Color.White);
+            }
+
         }
 
         public bool Destroyed
@@ -72,8 +78,30 @@ namespace WitchWay
             m_prevPosition = m_position;
         }
     }
-
-    internal interface ISprite
+    abstract class AnimatedCollideableSprite : CollideableSprite
     {
+        protected virtual Animation m_animation { get; set; }
+
+        public override Rectangle Hitbox
+        {
+            get
+            {
+                return new Rectangle((int)m_position.X, (int)m_position.Y, m_animation.FrameWidth, m_animation.FrameHeight);
+            }
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            m_animation.Draw(spriteBatch, m_position);
+        }
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            m_animation.Update(gameTime);
+        }
+        public override void Load(ContentManager content, Vector2 pos)
+        {
+            base.Load(content, pos);
+            m_visible = false;
+        }
     }
 }

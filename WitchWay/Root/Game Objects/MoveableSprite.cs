@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,6 @@ namespace WitchWay
 {
     abstract class MoveableSprite : CollideableSprite, IMoveable
     {
-     
         public void Move(GameTime gameTime)
         {
 
@@ -20,6 +21,20 @@ namespace WitchWay
         }
 
         public abstract Vector2 PerformMove(GameTime gameTime);
-
     }
+
+    abstract class AnimatedMoveableSprite : AnimatedCollideableSprite, IMoveable
+    {
+        public void Move(GameTime gameTime)
+        {
+
+            Vector2 velocity = PerformMove(gameTime);
+
+            m_position += velocity;
+
+        }
+
+        public abstract Vector2 PerformMove(GameTime gameTime);
+    }
+
 }

@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace WitchWay
 {
-    class DoubleCauldron : MoveableSprite //DoubleCauldron class inherits properties from the Sprite class
+    class DoubleCauldron : AnimatedCollideableSprite //DoubleCauldron class inherits from AnimatedCollideableSprite
     {
         private bool v;
 
@@ -22,14 +22,11 @@ namespace WitchWay
         {
         }
 
-        public override Vector2 PerformMove(GameTime gameTime)
-        {
-            return new Vector2();
-        }
+       
         public override void Load(ContentManager content, Vector2 pos)
         {
             base.Load(content, pos);
-            m_texture = content.Load<Texture2D>("doublecauldron");
+            m_animation = new Animation(content.Load<Texture2D>("doubleCauldronSpriteSheet"), (1 / 10f), 10, 1, 0, 9);
         }
     }
 }

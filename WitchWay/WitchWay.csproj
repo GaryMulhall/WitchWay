@@ -38,7 +38,8 @@
     <ApplicationIcon>Content\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ImageCounter.cs" />
+    <Compile Include="Root\Game Objects\Animation.cs" />
+    <Compile Include="Root\Screens\ImageCounter.cs" />
     <Compile Include="Root\Game Objects\Orb.cs" />
     <Compile Include="Root\Game Objects\Door.cs" />
     <Compile Include="Root\Screens\GameOverScreen.cs" />

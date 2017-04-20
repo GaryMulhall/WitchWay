@@ -9,8 +9,10 @@ using Microsoft.Xna.Framework.Content;
 
 namespace WitchWay
 {
-    class Cauldron : CollideableSprite // inherits from CollideableSprite class
+
+    class Cauldron : AnimatedCollideableSprite // inherits from AnimatedCollideableSprite class
     {
+
         private bool v;
 
         public Cauldron()
@@ -24,8 +26,9 @@ namespace WitchWay
 
         public override void Load(ContentManager content, Vector2 pos)
         {
+
+            m_animation = new Animation(content.Load<Texture2D>("cauldronSpriteSheet"), (1 / 10f), 10, 1, 0, 9);
             base.Load(content, pos);
-            m_texture = content.Load<Texture2D>("cauldron");
         }
     }
 }

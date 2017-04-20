@@ -39,8 +39,8 @@ namespace WitchWay
             continueButton = new Button();
             continueButton.Load(content, new Vector2(540, 310), "continueButton", "continueButtonHighlight");
 
-            livesCounter = new ImageCounter(content.Load<Texture2D>("orbCollected"), content.Load<Texture2D>("orb"), new Vector2(1080, 25), new Vector2(50, 0), 3, 2);
-            orbsCounter = new ImageCounter(content.Load<Texture2D>("orbCollected"), content.Load<Texture2D>("orb"), new Vector2(50, 25), new Vector2(50, 0), 3, 2);
+            livesCounter = new ImageCounter(content.Load<Texture2D>("heart"), content.Load<Texture2D>("heartInactive"), new Vector2(1080, 15), new Vector2(50, 0), 3, 2);
+            orbsCounter = new ImageCounter(content.Load<Texture2D>("orbCounter"), content.Load<Texture2D>("orbInactive"), new Vector2(50, 15), new Vector2(50, 0), 3, 2);
 
         }
 
@@ -135,7 +135,7 @@ namespace WitchWay
             newSprite.Load(content, pos);
             collideableSprites.Add(newSprite);
         }
-        public void addMoveable(ContentManager content, Vector2 pos, MoveableSprite newSprite)
+        public void addMoveable(ContentManager content, Vector2 pos, IMoveable newSprite)
         {
             newSprite.Load(content, pos);
             moveableSprites.Add(newSprite);

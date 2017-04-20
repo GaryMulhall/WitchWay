@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WitchWay
 {
-    class Poop : MoveableSprite // inherits from MoveableSprite class
+    class Poop : AnimatedMoveableSprite // inherits from MoveableSprite class
     {
 
         Vector2 m_velocity;
@@ -23,9 +23,8 @@ namespace WitchWay
 
         public override void Load(ContentManager content, Vector2 pos)
         {
-           
+            m_animation = new Animation(content.Load<Texture2D>("poopSpriteSheet"), (1 / 5f), 10, 1, 0, 9);
             base.Load(content, pos);
-            m_texture = content.Load<Texture2D>("poop");
         }
 
         public override Vector2 PerformMove(GameTime gameTime)
@@ -36,21 +35,21 @@ namespace WitchWay
 
         public void MoveUp()
         {
-            if (m_position.Y > Game1.screenHeight - m_texture.Height - 1)
+            if (m_position.Y > Game1.screenHeight - m_animation.FrameHeight - 1)
             {
                 m_velocity.Y = -Math.Abs(m_velocity.Y);
             }
         }
         public void MoveDown()
         {
-            if (m_position.Y < 0 - m_texture.Height + 50)
+            if (m_position.Y < 0 - m_animation.FrameHeight + 50)
             {
                 m_velocity.Y = Math.Abs(m_velocity.Y);
             }
         }
         public void MoveLeft()
         {
-            if (m_position.X > 1280 - m_texture.Height - 1)
+            if (m_position.X > 1280 - m_animation.FrameHeight - 1)
                 m_velocity.X = -Math.Abs(m_velocity.X);
         }
         public void MoveRight()
@@ -66,8 +65,9 @@ namespace WitchWay
             MoveDown();
             MoveLeft();
             MoveRight();
-
+            base.Update(gameTime);
         }
+
     }
 }
 

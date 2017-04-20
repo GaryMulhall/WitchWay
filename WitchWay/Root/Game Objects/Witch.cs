@@ -7,12 +7,17 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+
 namespace WitchWay
 {
-    class Witch : MoveableSprite // inherits from MoveableSprite class
+    class Witch : AnimatedMoveableSprite // inherits from AnimatedMoveableSprite class
     {
         List<ICollideable> collideableSprites;
         List<IMoveable> moveableSprites;
+
+        Dictionary<states, Animation> m_animations = new Dictionary<states, Animation>();
+
+        protected override Animation m_animation { get { return m_animations[m_state]; } }
 
         private bool v;
         const float PlayerSpeed = 9.4f;
@@ -21,37 +26,40 @@ namespace WitchWay
         public int orbs = 0;
         protected Game1 Game;
 
+        SpriteEffects Effects;
+
         int m_gameTime;
 
         Vector2 livesPos;
         Vector2 orbsPos;
 
         SpriteFont Font;
-        
+
         // States the player character can achieve
-        enum states { Grounded, Falling, Jumping }
+        enum states { Idle, Falling, Jumping, Walking }
 
         private states m_state;
 
         public Witch(bool v, List<ICollideable> collideableSprites, List<IMoveable> moveableSprites, Game1 game)
         {
             // default state is grounded
-            m_state = states.Grounded;
+            m_state = states.Idle;
 
             this.v = v;
             this.collideableSprites = collideableSprites;
             this.moveableSprites = moveableSprites;
-            Game = game; 
-            
+            Game = game;
+
+            Effects = SpriteEffects.None;
         }
 
         // boolean to check if the player character can move 
         public bool CanMove(Vector2 velocity)
         {
             Vector2 newPos = m_position + velocity;
-            Rectangle newBounds = new Rectangle(newPos.ToPoint(), m_texture.Bounds.Size);
+            Rectangle newBounds = new Rectangle(newPos.ToPoint(), m_animation.FrameSize);
 
-            if (newPos.X < 0 || newPos.Y < 0 || newPos.X + m_texture.Width > Game1.screenWidth || newPos.Y > Game1.screenHeight + m_texture.Height)
+            if (newPos.X < 0 || newPos.Y < 0 || newPos.X + m_animation.FrameWidth > Game1.screenWidth || newPos.Y > Game1.screenHeight + m_animation.FrameHeight)
                 return false;
 
             foreach (var platform in collideableSprites.OfType<Platform>())
@@ -60,27 +68,29 @@ namespace WitchWay
                 {
                     return false;
                 }
-                foreach (var doubleCauldron in collideableSprites.OfType<DoubleCauldron>())
+            }
+            foreach (var doubleCauldron in collideableSprites.OfType<DoubleCauldron>())
+            {
+                if (newBounds.Intersects(doubleCauldron.Hitbox))
                 {
-                    if (newBounds.Intersects(doubleCauldron.Hitbox))
-                        return false;
-                }
-                foreach (var cauldron in collideableSprites.OfType<Cauldron>())
-                {
-                    if (newBounds.Intersects(cauldron.Hitbox))
-                    {
-                        return false;
-                    }
-                    foreach (var door in collideableSprites.OfType<Door>())
-                    {
-                        if (newBounds.Intersects(door.Hitbox))
-                        {
-                            return false;
-                        }
-                    }
+                    return false;
                 }
             }
-            return true;
+            foreach (var cauldron in collideableSprites.OfType<Cauldron>())
+            {
+                if (newBounds.Intersects(cauldron.Hitbox))
+                {
+                    return false;
+                }
+            }
+            foreach (var door in collideableSprites.OfType<Door>())
+            {
+                if (newBounds.Intersects(door.Hitbox))
+                {
+                    return false;
+                }
+            }
+                return true;
         }
 
         public override Vector2 PerformMove(GameTime gameTime)
@@ -98,7 +108,7 @@ namespace WitchWay
             {
                 if (Hitbox.Intersects(door.Hitbox))
                 {
-                    m_position.X = door.Hitbox.X - m_texture.Width;
+                    m_position.X = door.Hitbox.X - m_animation.FrameWidth;
                 }
 
                 if (orbs == 3)
@@ -151,15 +161,15 @@ namespace WitchWay
                 {
                     if (Hitbox.Intersects(platform.Hitbox))
                     {
-                        m_position.Y = platform.Hitbox.Y - m_texture.Height;
-                        m_state = states.Grounded;
+                        m_position.Y = platform.Hitbox.Y - m_animation.FrameHeight;
+                        m_state = states.Idle;
                     }
                 }
                 foreach (var cauldron in collideableSprites.OfType<Cauldron>())
                 {
                     if (Hitbox.Intersects(cauldron.Hitbox))
                     {
-                        m_position.Y = cauldron.Hitbox.Y - m_texture.Height;
+                        m_position.Y = cauldron.Hitbox.Y - m_animation.FrameHeight;
                         jumpSpeed = -17;
                         m_state = states.Jumping;
                     }
@@ -168,21 +178,21 @@ namespace WitchWay
                 {
                     if (Hitbox.Intersects(doubleCauldron.Hitbox))
                     {
-                        m_position.Y = doubleCauldron.Hitbox.Y - m_texture.Height;
+                        m_position.Y = doubleCauldron.Hitbox.Y - m_animation.FrameHeight;
                         jumpSpeed = -22;
                         m_state = states.Jumping;
                     }
                 }
-               
-                if (m_position.Y >= Game1.screenHeight - m_texture.Height - 1)
+
+                if (m_position.Y >= Game1.screenHeight - m_animation.FrameHeight - 1)
                 {
-                    m_state = states.Grounded;
-                    m_position.Y = Game1.screenHeight - m_texture.Height;
+                    m_state = states.Idle;
+                    m_position.Y = Game1.screenHeight - m_animation.FrameHeight;
                 }
             }
 
-            // setting what happens if the character is currently in the grounded stater
-            if (m_state == states.Grounded)
+            // setting what happens if the character is currently in the grounded state
+            if (m_state == states.Idle || m_state == states.Walking)
             {
                 if (Input.isDown(Keys.Space))
                 {
@@ -207,7 +217,7 @@ namespace WitchWay
                             grounded = true;
                         }
                     }
-                    if (m_position.Y >= Game1.screenHeight - m_texture.Height)
+                    if (m_position.Y >= Game1.screenHeight - m_animation.FrameHeight)
                     {
                         grounded = true;
                     }
@@ -244,16 +254,34 @@ namespace WitchWay
             // control code
             if (Input.isDown(Keys.A))
             {
+                if (m_state == states.Idle)
+                {
+                    m_state = states.Walking;
+                }
                 if (CanMove(new Vector2(-10, -1)))
                 {
                     velocity.X -= 10;
+                    Effects = SpriteEffects.FlipHorizontally;
                 }
             }
-            if (Input.isDown(Keys.D))
+            else if (Input.isDown(Keys.D))
             {
+                if (m_state == states.Idle)
+                {
+                    m_state = states.Walking;
+                }
                 if (CanMove(new Vector2(10, -1)))
                 {
                     velocity.X += 10;
+                    Effects = SpriteEffects.None;
+                }
+            }
+            else
+            {
+                if (m_state == states.Walking)
+                {
+
+                    m_state = states.Idle;
                 }
             }
             return velocity;
@@ -271,9 +299,8 @@ namespace WitchWay
         public override void Update(GameTime gameTime)
         {
             m_gameTime += gameTime.ElapsedGameTime.Milliseconds;
-
+            base.Update(gameTime);
             Move(gameTime);
-
         }
         public override void Load(ContentManager content, Vector2 pos)
         {
@@ -281,13 +308,19 @@ namespace WitchWay
             orbsPos = new Vector2(40, 20);
             Font = content.Load<SpriteFont>("Font");
             base.Load(content, pos);
-            m_texture = content.Load<Texture2D>("witch");
+
+            m_animations[states.Idle] = new Animation(content.Load<Texture2D>("witchSpriteSheet"), (1 / 5f), 10, 3, 0, 9);
+            m_animations[states.Walking] = new Animation(content.Load<Texture2D>("witchSpriteSheet"), (1 / 7f), 10, 3, 10, 19);
+            m_animations[states.Jumping] = new Animation(content.Load<Texture2D>("witchSpriteSheet"), (1 / 10f), 10, 3, 20, 29);
+            m_animations[states.Falling] = m_animations[states.Jumping];
+
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.DrawString(Font, string.Format("Lives: " + lives), livesPos, Color.White);
             //spriteBatch.DrawString(Font, string.Format("Orbs: " + orbs), orbsPos, Color.White);
-            spriteBatch.Draw(m_texture, m_position, Color.White);
+
+            m_animation.Draw(spriteBatch, m_position, Effects);
         }
     }
 }
