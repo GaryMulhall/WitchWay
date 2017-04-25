@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Root\Game Objects\Animation.cs" />
+    <Compile Include="Root\Screens\HallOfFameScreen.cs" />
     <Compile Include="Root\Screens\ImageCounter.cs" />
     <Compile Include="Root\Game Objects\Orb.cs" />
     <Compile Include="Root\Game Objects\Door.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Root\Game Objects\CollideableSprite.cs" />
     <Compile Include="Root\Managers\ScreenManager.cs" />
     <Compile Include="Root\Game Objects\Spike.cs" />
+    <Compile Include="Root\Screens\PlayerEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

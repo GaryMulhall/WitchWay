@@ -23,9 +23,9 @@ Platform,650,200
 Platform,450,200
 Platform,0,200
 ,Cat position,
-Cat,0,170
+Cat,35,165
 ,Witch position,
-Witch,0,100
+Witch,50,650
 ,Cauldron positions,
 Cauldron,500,420
 Cauldron,850,450
@@ -33,7 +33,7 @@ Cauldron,180,450
 Cauldron,1175,290
 Cauldron,230,250
 ,Door position
-Door,80,125
+Door,7,128
 ,Orbs positions
 Orb,700,280
 Orb,35, 350

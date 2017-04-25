@@ -25,6 +25,7 @@ namespace WitchWay
         ImageCounter livesCounter;
         ImageCounter orbsCounter;
 
+        float elapsedTime = 0;
         public GameScreen(Game1 game) : base(game)
         {
         }
@@ -141,9 +142,9 @@ namespace WitchWay
             moveableSprites.Add(newSprite);
         }
 
-
         public override void Update(GameTime gameTime)
         {
+            elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (moveableSprites.OfType<Witch>().Count() > 0)
             {
                 Witch witch = moveableSprites.OfType<Witch>().First();
@@ -151,8 +152,6 @@ namespace WitchWay
                 livesCounter.SetCount(witch.lives);
                 orbsCounter.SetCount(witch.orbs);
             }
-
-
 
             if (Input.beenPressed(Keys.R))
             {
@@ -181,7 +180,12 @@ namespace WitchWay
                 {
                     LoadLevel(Game.Content, currentLevel + 1);
                 }
+                else if(currentLevel > 4 && continueButton.IsClicked())
+                {
+                    Game.ScreenMgr.Switch(new PlayerEntry(Game, (int)elapsedTime));
+                }
             }
+
             collideableSprites.RemoveAll(sprite => sprite.Destroyed);
         }
 

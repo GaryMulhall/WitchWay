@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace WitchWay
 {
@@ -25,12 +27,22 @@ namespace WitchWay
             Content.RootDirectory = "Content";
         }
 
-        protected override void Initialize()
+        public struct HighScore
         {
+            public string[] PlayerName;
+            public int[] Score;
+            public int Count;
 
-            base.Initialize();
+            public HighScore(int count)
+            {
+                PlayerName = new string[count];
+                Score = new int[count];
+
+                Count = count;
+            }
         }
 
+    
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);

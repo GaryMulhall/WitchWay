@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
 namespace WitchWay
 {
 
-    class Cat : CollideableSprite // inherits from CollideableSprite class
+    class Cat : AnimatedCollideableSprite // inherits from CollideableSprite class
     {
         private bool v;
 
@@ -22,7 +22,7 @@ namespace WitchWay
         public override void Load(ContentManager content, Vector2 pos)
         {
             base.Load(content, pos);
-            m_texture = content.Load<Texture2D>("cat");
+            m_animation = new Animation(content.Load<Texture2D>("catSpriteSheet"), (1 / 10f), 8, 1, 0, 8);
 
         }
     }

@@ -31,11 +31,11 @@ Platform,500,200
 Platform,250,200
 Platform,0,200
 ,Cat position,
-Cat,0,170
+Cat,35,165
 ,Witch position,
-Witch,0,100
+Witch,50,650
 ,Door position
-Door,80,125
+Door,7,128
 ,Orb positions
 Orb,1180,675
 Orb,1260,220

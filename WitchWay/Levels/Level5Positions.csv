@@ -16,7 +16,7 @@ Poop,1250,550,0.15,0
 
 
 ,Door position
-Door,1200,600
+Door,1145,650
 
 
 ,Orb positions,
@@ -34,9 +34,9 @@ Spike,1100,300
 Spike,1100,210
 
 
-Spike,265,630
-Spike,465,630
-Spike,665,630
+Spike,263,630
+Spike,463,630
+Spike,663,630
 Spike,765,640
 Spike,765,550
 Spike,765,460
