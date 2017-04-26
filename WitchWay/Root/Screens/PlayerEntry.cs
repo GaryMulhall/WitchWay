@@ -14,8 +14,6 @@ namespace WitchWay
     {
    private Sprite m_texture;
 
-        Button quitButton;
-        Button mainMenuButton;
         Button continueButton;
 
         SpriteFont font;
@@ -40,9 +38,7 @@ namespace WitchWay
             continueButton.Load(content, new Vector2(650, 650), "continueButton", "continueButtonHighlight");
 
             font = content.Load<SpriteFont>("Font");
-
         }
-
 
         public override void Draw(SpriteBatch spriteBatch)
         {

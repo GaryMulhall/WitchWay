@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace WitchWay
 {
@@ -25,6 +26,10 @@ namespace WitchWay
         public int lives = 3;
         public int orbs = 0;
         protected Game1 Game;
+
+        private SoundEffect JumpSound;
+        private SoundEffect DeathSound;
+        private SoundEffect CatCollectedSound;
 
         SpriteEffects Effects;
 
@@ -102,6 +107,7 @@ namespace WitchWay
                 {
                     orbs++;
                     orb.Destroyed = true;
+                    CatCollectedSound.Play();
                 }
             }
             foreach (var door in collideableSprites.OfType<Door>())
@@ -128,6 +134,7 @@ namespace WitchWay
                 {
                     cat.Destroyed = true;
                     orbs = 0;
+                    CatCollectedSound.Play();
                 }
             }
             foreach (var poop in moveableSprites.OfType<Poop>())
@@ -138,6 +145,7 @@ namespace WitchWay
                     lives--;
                     m_position.X = 50;
                     m_position.Y = 650;
+                    DeathSound.Play();
                 }
             }
             foreach (var spike in collideableSprites.OfType<Spike>())
@@ -148,6 +156,7 @@ namespace WitchWay
                     lives--;
                     m_position.X = 50;
                     m_position.Y = 650;
+                    DeathSound.Play();
                 }
             }
 
@@ -172,6 +181,7 @@ namespace WitchWay
                         m_position.Y = cauldron.Hitbox.Y - m_animation.FrameHeight;
                         jumpSpeed = -17;
                         m_state = states.Jumping;
+                        JumpSound.Play();
                     }
                 }
                 foreach (var doubleCauldron in collideableSprites.OfType<DoubleCauldron>())
@@ -181,6 +191,7 @@ namespace WitchWay
                         m_position.Y = doubleCauldron.Hitbox.Y - m_animation.FrameHeight;
                         jumpSpeed = -22;
                         m_state = states.Jumping;
+                        JumpSound.Play();
                     }
                 }
 
@@ -198,6 +209,7 @@ namespace WitchWay
                 {
                     jumpSpeed = -15;
                     m_state = states.Jumping;
+                    JumpSound.Play();
                 }
                 else
                 {
@@ -252,7 +264,7 @@ namespace WitchWay
                 }
             }
             // control code
-            if (Input.isDown(Keys.A))
+            if (Input.isDown(Keys.A) || (Input.isDown(Keys.Left)))
             {
                 if (m_state == states.Idle)
                 {
@@ -264,7 +276,7 @@ namespace WitchWay
                     Effects = SpriteEffects.FlipHorizontally;
                 }
             }
-            else if (Input.isDown(Keys.D))
+            else if (Input.isDown(Keys.D) || (Input.isDown(Keys.Right)))
             {
                 if (m_state == states.Idle)
                 {
@@ -312,14 +324,14 @@ namespace WitchWay
             m_animations[states.Idle] = new Animation(content.Load<Texture2D>("witchSpriteSheet"), (1 / 5f), 10, 3, 0, 9);
             m_animations[states.Walking] = new Animation(content.Load<Texture2D>("witchSpriteSheet"), (1 / 7f), 10, 3, 10, 19);
             m_animations[states.Jumping] = new Animation(content.Load<Texture2D>("witchSpriteSheet"), (1 / 10f), 10, 3, 20, 29);
-            m_animations[states.Falling] = m_animations[states.Jumping];
+            m_animations[states.Falling] = m_animations[states.Idle];
 
+            JumpSound = content.Load<SoundEffect>("jumpSound");
+            DeathSound = content.Load<SoundEffect>("deathSound");
+            CatCollectedSound = content.Load<SoundEffect>("catCollectedSound");
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.DrawString(Font, string.Format("Lives: " + lives), livesPos, Color.White);
-            //spriteBatch.DrawString(Font, string.Format("Orbs: " + orbs), orbsPos, Color.White);
-
             m_animation.Draw(spriteBatch, m_position, Effects);
         }
     }

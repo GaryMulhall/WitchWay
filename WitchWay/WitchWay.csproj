@@ -39,7 +39,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Root\Game Objects\Animation.cs" />
+    <Compile Include="Root\Game Objects\PumpkinModel.cs" />
     <Compile Include="Root\Screens\HallOfFameScreen.cs" />
+    <Compile Include="Root\Screens\HelpScreen.cs" />
     <Compile Include="Root\Screens\ImageCounter.cs" />
     <Compile Include="Root\Game Objects\Orb.cs" />
     <Compile Include="Root\Game Objects\Door.cs" />

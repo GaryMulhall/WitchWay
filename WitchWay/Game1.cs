@@ -68,7 +68,7 @@ namespace WitchWay
         }
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CadetBlue);
+            GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
 

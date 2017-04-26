@@ -33,7 +33,7 @@ namespace WitchWay
         {
             hallOfFame = LoadFile("HallOfFame.csv");
             hallOfFame[name] = score;
-            hallOfFame.OrderBy(item => item.Value);
+            hallOfFame.OrderByDescending(item => item.Value);
             SaveFile("HallOfFame.csv", hallOfFame);
         }
 
@@ -43,10 +43,10 @@ namespace WitchWay
             m_texture.Load(content, new Vector2(0, 0), "hallofFameScreen");
 
             quitButton = new Button();
-            quitButton.Load(content, new Vector2(900, 600), "quitButton", "quitButtonHighlight");
+            quitButton.Load(content, new Vector2(0, 600), "quitButton", "quitButtonHighlight");
 
             mainMenuButton = new Button();
-            mainMenuButton.Load(content, new Vector2(900, 500), "mainMenuButton", "mainMenuButtonHighlight");
+            mainMenuButton.Load(content, new Vector2(0, 500), "mainMenuButton", "mainMenuButtonHighlight");
             font = content.Load<SpriteFont>("Font");
         }
 

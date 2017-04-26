@@ -21,6 +21,7 @@ namespace WitchWay
        List<ICollideable> collideableSprites;
 
         Button continueButton;
+        SpriteFont font;
 
         ImageCounter livesCounter;
         ImageCounter orbsCounter;
@@ -43,6 +44,7 @@ namespace WitchWay
             livesCounter = new ImageCounter(content.Load<Texture2D>("heart"), content.Load<Texture2D>("heartInactive"), new Vector2(1080, 15), new Vector2(50, 0), 3, 2);
             orbsCounter = new ImageCounter(content.Load<Texture2D>("orbCounter"), content.Load<Texture2D>("orbInactive"), new Vector2(50, 15), new Vector2(50, 0), 3, 2);
 
+            font = content.Load<SpriteFont>("Font");
         }
 
         private void LoadLevel(ContentManager content, int level)
@@ -204,9 +206,10 @@ namespace WitchWay
             {
                 continueButton.Draw(spriteBatch);
             }
-
             livesCounter.Draw(spriteBatch);
             orbsCounter.Draw(spriteBatch);
+            TimeSpan time = new TimeSpan(0, 0, (int)elapsedTime);
+            spriteBatch.DrawString(font, time.ToString(), new Vector2(600, 20), Color.Black);
         }
     }
 }

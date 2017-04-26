@@ -27,10 +27,10 @@ namespace WitchWay
             m_texture.Load(content, new Vector2(0, 0), "pauseScreen");
 
             resumeButton = new Button();
-            resumeButton.Load(content, new Vector2(300, 300), "resumeButton", "resumeButtonHighlight");
+            resumeButton.Load(content, new Vector2(0, 500), "resumeButton", "resumeButtonHighlight");
 
             mainMenuButton = new Button();
-            mainMenuButton.Load(content, new Vector2(300, 500), "mainMenuButton", "mainMenuButtonHighlight");
+            mainMenuButton.Load(content, new Vector2(0, 600), "mainMenuButton", "mainMenuButtonHighlight");
         }
 
         public override void Update(GameTime gameTime)
