@@ -31,6 +31,11 @@ namespace WitchWay
         private SoundEffect DeathSound;
         private SoundEffect CatCollectedSound;
 
+        private event Action<Orb> OnOrbCollision;
+        private event Action<Spike> OnSpikeCollision;
+        private event Action<Cauldron> CauldronJump;
+        private event Action<Poop> OnPoopCollision;
+
         SpriteEffects Effects;
 
         int m_gameTime;
@@ -56,6 +61,40 @@ namespace WitchWay
             Game = game;
 
             Effects = SpriteEffects.None;
+
+            OnOrbCollision += Witch_OnOrbCollision;
+            OnSpikeCollision += Witch_OnSpikeCollision;
+            CauldronJump += Witch_CauldronJump;
+            OnPoopCollision += Witch_OnPoopCollision;
+        }
+        private void Witch_OnPoopCollision(Poop poop)
+        {
+            m_gameTime = 0;
+            lives--;
+            m_position.X = 50;
+            m_position.Y = 650;
+            DeathSound.Play();
+        }
+        private void Witch_CauldronJump(Cauldron cauldron)
+        {
+            m_position.Y = cauldron.Hitbox.Y - m_animation.FrameHeight;
+            jumpSpeed = -17;
+            m_state = states.Jumping;
+            JumpSound.Play();
+        }
+        private void Witch_OnSpikeCollision(Spike spike)
+        {
+            m_gameTime = 0;
+            lives--;
+            m_position.X = 50;
+            m_position.Y = 650;
+            DeathSound.Play();
+        }
+        private void Witch_OnOrbCollision(Orb orb)
+        {
+            orbs++;
+            orb.Destroyed = true;
+            CatCollectedSound.Play();
         }
 
         // boolean to check if the player character can move 
@@ -70,6 +109,13 @@ namespace WitchWay
             foreach (var platform in collideableSprites.OfType<Platform>())
             {
                 if (newBounds.Intersects(platform.Hitbox))
+                {
+                    return false;
+                }
+            }
+            foreach(var movingPlatform in moveableSprites.OfType<MovingPlatform>())
+            {
+                if (newBounds.Intersects(movingPlatform.Hitbox))
                 {
                     return false;
                 }
@@ -105,11 +151,10 @@ namespace WitchWay
             {
                 if (Hitbox.Intersects(orb.Hitbox))
                 {
-                    orbs++;
-                    orb.Destroyed = true;
-                    CatCollectedSound.Play();
+                    OnOrbCollision(orb);
                 }
             }
+
             foreach (var door in collideableSprites.OfType<Door>())
             {
                 if (Hitbox.Intersects(door.Hitbox))
@@ -122,12 +167,14 @@ namespace WitchWay
                     door.Destroyed = true;
                 }
             }
+
             if (lives == 0)
             {
                 Game.ScreenMgr.Switch(new GameOverScreen(Game));
                 lives = 3;
                 orbs = 0;
             }
+
             foreach (var cat in collideableSprites.OfType<Cat>())
             {
                 if (Hitbox.Intersects(cat.Hitbox))
@@ -137,26 +184,20 @@ namespace WitchWay
                     CatCollectedSound.Play();
                 }
             }
+
             foreach (var poop in moveableSprites.OfType<Poop>())
             {
                 if (Hitbox.Intersects(poop.Hitbox) && m_gameTime > 0)
                 {
-                    m_gameTime = 0;
-                    lives--;
-                    m_position.X = 50;
-                    m_position.Y = 650;
-                    DeathSound.Play();
+                    OnPoopCollision(poop);
                 }
             }
+
             foreach (var spike in collideableSprites.OfType<Spike>())
             {
                 if (Hitbox.Intersects(spike.Hitbox) && m_gameTime > 0)
                 {
-                    m_gameTime = 0;
-                    lives--;
-                    m_position.X = 50;
-                    m_position.Y = 650;
-                    DeathSound.Play();
+                    OnSpikeCollision(spike);
                 }
             }
 
@@ -166,6 +207,7 @@ namespace WitchWay
             {
                 jumpSpeed += 1;
                 velocity.Y += jumpSpeed;
+
                 foreach (var platform in collideableSprites.OfType<Platform>())
                 {
                     if (Hitbox.Intersects(platform.Hitbox))
@@ -174,14 +216,22 @@ namespace WitchWay
                         m_state = states.Idle;
                     }
                 }
+
+                foreach (var movingPlatform in moveableSprites.OfType<MovingPlatform>())
+                {
+                    Rectangle movingBounds = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height + 5);
+                    if (movingBounds.Intersects(movingPlatform.Hitbox))
+                    {
+                        m_position.Y = movingPlatform.Hitbox.Y - m_animation.FrameHeight;
+                        m_state = states.Idle;
+                    }
+                }
+
                 foreach (var cauldron in collideableSprites.OfType<Cauldron>())
                 {
                     if (Hitbox.Intersects(cauldron.Hitbox))
                     {
-                        m_position.Y = cauldron.Hitbox.Y - m_animation.FrameHeight;
-                        jumpSpeed = -17;
-                        m_state = states.Jumping;
-                        JumpSound.Play();
+                        CauldronJump(cauldron);
                     }
                 }
                 foreach (var doubleCauldron in collideableSprites.OfType<DoubleCauldron>())
@@ -216,6 +266,13 @@ namespace WitchWay
                     bool grounded = false;
 
                     foreach (var platform in collideableSprites.OfType<Platform>())
+                    {
+                        if (Hitbox.Intersects(platform.Hitbox))
+                        {
+                            grounded = true;
+                        }
+                    }
+                    foreach (var platform in moveableSprites.OfType<MovingPlatform>())
                     {
                         if (Hitbox.Intersects(platform.Hitbox))
                         {

@@ -87,7 +87,7 @@ namespace WitchWay
                     {
                         addCollideable(content, new Vector2(x, y), new Platform(true));
                     }
-                    else if (values[0] == "Cat")
+                      else if (values[0] == "Cat")
                     {
                         addCollideable(content, new Vector2(x, y), new Cat(true));
                     }
@@ -129,6 +129,19 @@ namespace WitchWay
                         catch { continue; }
                         addMoveable(content, new Vector2(x, y), new Poop(true, collideableSprites, moveableSprites, new Vector2 (velocityX, velocityY)));
                     }
+                    else if (values[0] == "MovingPlatform")
+                    {
+                        float velocityX;
+                        float velocityY;
+
+                        try
+                        {
+                            float.TryParse(values[3], out velocityX);
+                            float.TryParse(values[4], out velocityY);
+                        }
+                        catch { continue; }
+                        addMoveable(content, new Vector2(x, y), new MovingPlatform(true, collideableSprites, moveableSprites, new Vector2(velocityX, velocityY)));
+                    }
                 }
             }
         }
@@ -158,6 +171,10 @@ namespace WitchWay
             if (Input.beenPressed(Keys.R))
             {
                 LoadLevel(Game.Content, currentLevel);
+            }
+            if (Input.beenPressed(Keys.NumPad0))
+            {
+                LoadLevel(Game.Content, currentLevel + 1);
             }
             foreach (var moveable in moveableSprites)
             {

@@ -61,7 +61,7 @@ namespace WitchWay
             foreach (var item in hallOfFame)
             {
                 string line = item.Key + ":" + item.Value.ToString();
-                spriteBatch.DrawString(font, line, new Vector2 (500, 650 + padding), Color.Black);
+                spriteBatch.DrawString(font, line, new Vector2 (500, 250 + padding), Color.Black);
                 padding += 35;
             }
         }

@@ -52,7 +52,6 @@ namespace WitchWay
 
         public virtual void Load(ContentManager content, Vector2 pos)
         {
-            m_texture = null;
             m_position = pos;
         }
         public virtual void ResetPosXLeft()

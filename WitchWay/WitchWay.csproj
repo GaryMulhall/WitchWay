@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Root\Game Objects\Animation.cs" />
+    <Compile Include="Root\Game Objects\MovingPlatform.cs" />
     <Compile Include="Root\Game Objects\PumpkinModel.cs" />
     <Compile Include="Root\Screens\HallOfFameScreen.cs" />
     <Compile Include="Root\Screens\HelpScreen.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="Root\Game Objects\Button.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Root\Managers\Input.cs" />
-    <Compile Include="Root\Game Objects\MoveableSprite.cs" />
+    <Compile Include="Root\Managers\MoveableSprite.cs" />
     <Compile Include="Root\Screens\BaseScreen.cs" />
     <Compile Include="Root\Screens\GameScreen.cs" />
     <Compile Include="Root\Screens\MainMenuScreen.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Root\Game Objects\DoubleCauldron.cs" />
     <Compile Include="Root\Game Objects\Witch.cs" />
     <Compile Include="Interfaces.cs" />
-    <Compile Include="Root\Game Objects\CollideableSprite.cs" />
+    <Compile Include="Root\Managers\CollideableSprite.cs" />
     <Compile Include="Root\Managers\ScreenManager.cs" />
     <Compile Include="Root\Game Objects\Spike.cs" />
     <Compile Include="Root\Screens\PlayerEntry.cs" />

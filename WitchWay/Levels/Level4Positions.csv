@@ -3,11 +3,6 @@ Platform,1000,620
 Platform,1100,620
 Platform,1200,620
 
-
-,Bottom left platform,
-
-
-
 ,Middle,
 Platform,380,570
 Platform,480,570
@@ -20,12 +15,16 @@ Platform,80,570
 ,Top,
 Platform,-50,250
 Platform,1180,150
-Platform,270,120
-Platform,580,120
-Platform,880,120
+
 Platform,-50,270
 Platform,0,270
 Platform,50,270
+
+,Moving platform positions,
+MovingPlatform,
+MovingPlatform,270,120,0,0.10
+MovingPlatform,580,120,0,0.10
+MovingPlatform,880,120,0,0.10
 
 ,Cat position,
 Cat,1220,113
@@ -45,11 +44,6 @@ Cauldron,450,180
 Cauldron,750,180
 
 Cauldron,1050,180
-
-
-,Poop positions,
-Poop,675,650
-
 
 ,Door position,
 Door,1190,78
@@ -81,4 +75,4 @@ Spike,80,415
 ,Orb positions,
 Orb,1240,520
 Orb,15,225
-Orb,648,260
+Orb,648,250
